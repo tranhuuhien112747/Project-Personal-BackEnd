@@ -1,18 +1,14 @@
-package project.shops.model;
+package project.shops.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
-import java.util.Collection;
-
-@Entity
-public class Goods {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CartDTO {
+    private long idCart;
+    private int quantity;
+    private Long idUser;
     private Long idGoods;
     private String goodsName;
     private String price;
-    private String quantity;
+    private String quantityGood;
     private String tradeMark;
     private String saleOff;
     private String priceForSaleOff;
@@ -20,25 +16,38 @@ public class Goods {
     private Boolean statusGood;
     private String categorySex;
 
-    @ManyToOne
-    @JoinColumn(name = "idCategory")
-    @JsonIgnoreProperties("goodsCollection")
-    private Category category;
-
-    @OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("good")
-    private Collection<BillGoods> billGoodsCollection;
-
-    @OneToMany(mappedBy = "good", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("good")
-    private Collection<Cart> cartCollection;
-
-    public String getImage() {
-        return image;
+    public CartDTO(long idCart, int quantity, Long idUser, Long idGoods) {
+        this.idCart = idCart;
+        this.quantity = quantity;
+        this.idUser = idUser;
+        this.idGoods = idGoods;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public CartDTO() {
+    }
+
+    public long getIdCart() {
+        return idCart;
+    }
+
+    public void setIdCart(long idCart) {
+        this.idCart = idCart;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
     public Long getIdGoods() {
@@ -61,24 +70,16 @@ public class Goods {
         return price;
     }
 
-    public Collection<BillGoods> getBillGoodsCollection() {
-        return billGoodsCollection;
-    }
-
-    public void setBillGoodsCollection(Collection<BillGoods> billGoodsCollection) {
-        this.billGoodsCollection = billGoodsCollection;
-    }
-
     public void setPrice(String price) {
         this.price = price;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public String getQuantityGood() {
+        return quantityGood;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public void setQuantityGood(String quantityGood) {
+        this.quantityGood = quantityGood;
     }
 
     public String getTradeMark() {
@@ -105,6 +106,14 @@ public class Goods {
         this.priceForSaleOff = priceForSaleOff;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Boolean getStatusGood() {
         return statusGood;
     }
@@ -121,19 +130,13 @@ public class Goods {
         this.categorySex = categorySex;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Collection<Cart> getCartCollection() {
-        return cartCollection;
-    }
-
-    public void setCartCollection(Collection<Cart> cartCollection) {
-        this.cartCollection = cartCollection;
+    @Override
+    public String toString() {
+        return "CartDTO{" +
+                "idCart=" + idCart +
+                ", quantity=" + quantity +
+                ", idUser=" + idUser +
+                ", idGoods=" + idGoods +
+                '}';
     }
 }

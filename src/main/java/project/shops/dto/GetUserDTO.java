@@ -1,14 +1,7 @@
-package project.shops.model;
+package project.shops.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
-import java.util.Collection;
-
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GetUserDTO {
     private Long idUser;
     private String username;
     private String password;
@@ -19,18 +12,8 @@ public class User {
     private String image;
     private Boolean status;
 
-    @ManyToOne
-    @JoinColumn(name = "idRole")
-    @JsonIgnoreProperties("userCollection")
-    private Role role;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("user")
-    private Collection<Bill> billCollection;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("user")
-    private Collection<Cart> cartCollection;
+    public GetUserDTO() {
+    }
 
     public Long getIdUser() {
         return idUser;
@@ -102,29 +85,5 @@ public class User {
 
     public void setStatus(Boolean status) {
         this.status = status;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public Collection<Bill> getBillCollection() {
-        return billCollection;
-    }
-
-    public void setBillCollection(Collection<Bill> billCollection) {
-        this.billCollection = billCollection;
-    }
-
-    public Collection<Cart> getCartCollection() {
-        return cartCollection;
-    }
-
-    public void setCartCollection(Collection<Cart> cartCollection) {
-        this.cartCollection = cartCollection;
     }
 }

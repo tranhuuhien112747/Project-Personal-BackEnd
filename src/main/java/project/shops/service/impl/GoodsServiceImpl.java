@@ -33,4 +33,19 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> findAllByCategorySex(String sex) {
         return goodsRepository.findAllByCategorySex(sex);
     }
+
+    @Override
+    public void create(Goods goods) {
+
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
+
+    @Override
+    public Goods findById(Long id) {
+        return goodsRepository.findById(id).orElse(null);
+    }
 }

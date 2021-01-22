@@ -3,21 +3,23 @@ package project.shops.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 public class BillGoods {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBillGoods;
+    private int quantityBooked;
 
-    @OneToMany(mappedBy = "billGoods", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("billGoods")
-    private Collection<Bill> billCollection;
+    @ManyToOne
+    @JoinColumn(name = "idBill")
+    @JsonIgnoreProperties("billGoodsCollection")
+    private Bill bill;
 
-    @OneToMany(mappedBy = "billGoods", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("billGoods")
-    private Collection<Goods> goodsCollection;
+    @ManyToOne
+    @JoinColumn(name = "idGoods")
+    @JsonIgnoreProperties("billGoodsCollection")
+    private Goods good;
 
     public Long getIdBillGoods() {
         return idBillGoods;
@@ -27,19 +29,27 @@ public class BillGoods {
         this.idBillGoods = idBillGoods;
     }
 
-    public Collection<Bill> getBillCollection() {
-        return billCollection;
+    public Bill getBill() {
+        return bill;
     }
 
-    public void setBillCollection(Collection<Bill> billCollection) {
-        this.billCollection = billCollection;
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 
-    public Collection<Goods> getGoodsCollection() {
-        return goodsCollection;
+    public Goods getGood() {
+        return good;
     }
 
-    public void setGoodsCollection(Collection<Goods> goodsCollection) {
-        this.goodsCollection = goodsCollection;
+    public void setGood(Goods good) {
+        this.good = good;
+    }
+
+    public int getQuantityBooked() {
+        return quantityBooked;
+    }
+
+    public void setQuantityBooked(int quantityBooked) {
+        this.quantityBooked = quantityBooked;
     }
 }

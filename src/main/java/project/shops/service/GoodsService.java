@@ -12,4 +12,10 @@ public interface GoodsService {
     List<Goods> findAllByTradeMark(String tradeMark);
 
     List<Goods> findAllByCategorySex(String sex);
+
+    void create(Goods goods);
+
+    void deleteById(Long id);
+
+    Goods findById(Long id);
 }
